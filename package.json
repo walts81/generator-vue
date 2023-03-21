@@ -1,6 +1,6 @@
 {
   "name": "@walts81/generator-vue",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Generates a skeleton for a Vue 3 project optionally using Vuetify or Bootstrap",
   "homepage": "",
   "author": {
