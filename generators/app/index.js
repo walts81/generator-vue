@@ -2,8 +2,10 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
-const _ = require('underscore.string');
+const stringHelpers = require('underscore.string');
 const superb = require('superb');
+
+-_.extend(Generator.prototype, require('yeoman-generator/lib/actions/install'));
 
 module.exports = class extends Generator {
   prompting() {
@@ -41,8 +43,8 @@ module.exports = class extends Generator {
 
     return this.prompt(prompts).then(props => {
       // To access props later use this.props.someAnswer;
-      props.slugged = _.slugify(props.name);
-      props.title = _.titleize(props.name);
+      props.slugged = stringHelpers.slugify(props.name);
+      props.title = stringHelpers.titleize(props.name);
       props.importUiFramework = '';
       if (props.uiframework === 'bootstrap') {
         props.importUiFramework = `@import '~/bootstrap/scss/bootstrap';`;
