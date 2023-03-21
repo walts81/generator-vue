@@ -1,7 +1,7 @@
 {
-  "name": "@walts81/generator-vue-3",
+  "name": "@walts81/generator-vue",
   "version": "1.0.0",
-  "description": "Generates a skeleton for a Vue3 project",
+  "description": "Generates a skeleton for a Vue 3 project optionally using Vuetify or Bootstrap",
   "homepage": "",
   "author": {
     "name": "Josh Walters",
@@ -13,12 +13,11 @@
   "main": "generators/index.js",
   "keywords": [
     "vue",
+    "vuetify",
+    "bootstrap",
     "typescript",
     "yeoman-generator"
   ],
-  "publishConfig": {
-    "access": "public"
-  },
   "devDependencies": {
     "eslint": "^6.6.0",
     "eslint-config-prettier": "^6.6.0",
@@ -32,7 +31,7 @@
     "yeoman-test": "^1.7.0"
   },
   "engines": {
-    "npm": ">= 4.0.0"
+    "npm": ">= 16.0.0"
   },
   "dependencies": {
     "chalk": "^2.1.0",
@@ -57,10 +56,21 @@
       "prettier"
     ]
   },
-  "scripts": {
-    "lint": "eslint .",
-    "format": "prettier . --write"
+  "publishConfig": {
+    "access": "public"
   },
-  "repository": "walts81/generator-vue-3",
+  "scripts": {
+    "lint": "eslint ./generators",
+    "format": "prettier ./generators --write",
+    "preversion": "npm run lint",
+    "postversion": "git push && git push --tags",
+    "version-patch": "npm version patch -m \"updated version to %s\"",
+    "version-minor": "npm version minor -m \"updated version to %s\"",
+    "version-major": "npm version major -m \"updated version to %s\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.comwalts81/generator-vue.git"
+  },
   "license": "MIT"
 }
