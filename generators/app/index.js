@@ -43,6 +43,10 @@ module.exports = class extends Generator {
       // To access props later use this.props.someAnswer;
       props.slugged = _.slugify(props.name);
       props.title = _.titleize(props.name);
+      props.importUiFramework = '';
+      if (props.uiframework === 'bootstrap') {
+        props.importUiFramework = `@import '~/bootstrap/scss/bootstrap';`;
+      }
       this.props = props;
     });
   }
@@ -69,6 +73,9 @@ module.exports = class extends Generator {
       this.addDependencies(this.props.uiframework);
       if (this.props.uiframework === 'vuetify') {
         this.addDevDependencies('vite-plugin-vuetify');
+      } else if (this.props.uiframework === 'bootstrap') {
+        this.addDependencies('dayjs');
+        this.addDevDependencies('@types/bootstrap');
       }
     }
   }

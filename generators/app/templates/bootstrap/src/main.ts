@@ -1,8 +1,9 @@
 import { createApp } from 'vue';
-import { vuetify } from './plugins/vuetify';
-import './style.scss';
+import dayjs from './plugins/dayjs';
+import 'bootstrap';
+import './styles/main.scss';
 import App from './App.vue';
 
 let app = createApp(App);
-app = app.use(vuetify);
+app = app.use(dayjs);
 app.mount('#app');
