@@ -40,6 +40,9 @@
     "yeoman-generator": "^3.1.1",
     "yosay": "^2.0.2"
   },
+  "peerDependencies": {
+    "@walts81/generator-vite-debug": "^1.0.2"
+  },
   "eslintConfig": {
     "extends": [
       "xo",
