@@ -5,7 +5,7 @@ const yosay = require('yosay');
 const stringHelpers = require('underscore.string');
 const superb = require('superb');
 
--_.extend(Generator.prototype, require('yeoman-generator/lib/actions/install'));
+_.extend(Generator.prototype, require('yeoman-generator/lib/actions/install'));
 
 module.exports = class extends Generator {
   prompting() {
