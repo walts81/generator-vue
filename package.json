@@ -41,7 +41,7 @@
     "yosay": "^2.0.2"
   },
   "peerDependencies": {
-    "@walts81/generator-vite-debug": "^1.0.2"
+    "@walts81/generator-vite-debug": "^1.0.3"
   },
   "eslintConfig": {
     "extends": [
