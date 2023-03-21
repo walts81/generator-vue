@@ -67,17 +67,20 @@ module.exports = class extends Generator {
   }
 
   install() {
-    this.destinationRoot(this.props.slugged);
-    this.addDependencies('vue');
-    if (this.props.uiframework) {
-      this.addDependencies(this.props.uiframework);
-      if (this.props.uiframework === 'vuetify') {
-        this.addDevDependencies('vite-plugin-vuetify');
-      } else if (this.props.uiframework === 'bootstrap') {
-        this.addDependencies('dayjs');
-        this.addDevDependencies('@types/bootstrap');
+    const deps = ['vue'];
+    const devDeps = [];
+    const ui = this.props.uiframework;
+    if (!!ui) {
+      deps.push(ui);
+      if (ui === 'vuetify') devDeps.push('vite-plugin-vuetify');
+      if (ui === 'bootstrap') {
+        deps.push('dayjs');
+        devDeps.push('@types/bootstrap');
       }
     }
+    this.destinationRoot(this.props.slugged);
+    this.addDependencies(deps);
+    this.addDevDependencies(devDeps);
   }
 
   end() {
