@@ -2,11 +2,8 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
-const _ = require('underscore');
 const stringHelpers = require('underscore.string');
 const superb = require('superb');
-
-_.extend(Generator.prototype, require('yeoman-generator/lib/actions/install'));
 
 module.exports = class extends Generator {
   prompting() {
@@ -67,23 +64,28 @@ module.exports = class extends Generator {
     if (!!this.props.uiframework) {
       this.fs.copyTpl(this.templatePath(this.props.uiframework), this.destinationPath(this.props.slugged), this.props);
     }
-  }
 
-  install() {
-    const deps = ['vue'];
-    const devDeps = [];
+    const pkgJson = {
+      dependencies: {
+        vue: '^3.2.47',
+      },
+      devDependencies: {},
+    };
     const ui = this.props.uiframework;
     if (!!ui) {
-      deps.push(ui);
-      if (ui === 'vuetify') devDeps.push('vite-plugin-vuetify');
-      if (ui === 'bootstrap') {
-        deps.push('dayjs');
-        devDeps.push('@types/bootstrap');
+      if (ui === 'vuetify') {
+        pkgJson.dependencies['vuetify'] = '^3.1.10';
+        pkgJson.devDependencies['vite-plugin-vuetify'] = '^1.0.2';
+      } else if (ui === 'bootstrap') {
+        pkgJson.dependencies['dayjs'] = '^1.11.7';
+        pkgJson.dependencies['bootstrap'] = '^5.2.3';
+        pkgJson.devDependencies['@types/bootstrap'] = '^5.2.6';
       }
     }
-    this.destinationRoot(this.props.slugged);
-    this.addDependencies(deps);
-    this.addDevDependencies(devDeps);
+
+    // Extend or create package.json file in destination path
+    const pkgJsonFile = this.props.slugged + '/package.json';
+    this.fs.extendJSON(this.destinationPath(pkgJsonFile), pkgJson);
   }
 
   end() {
